@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:06:38 by nrenz             #+#    #+#             */
-/*   Updated: 2022/04/06 18:04:21 by nrenz            ###   ########.fr       */
+/*   Updated: 2022/04/06 18:11:51 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*get_next_line(int fd)
 	static char	buffer[BUFFER_SIZE];
 	char		*output;
 
-	// printf("called gnl\n");
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	output = (char *)malloc(BUFFER_SIZE);
@@ -31,13 +30,10 @@ char	*ft_gnl_check(char *buffer, char *output, int fd)
 {
 	ssize_t	read_done;
 
-	// printf("called gnl check\n");
 	while (1)
 	{
-		// printf("buffer[0]: %d\n", buffer[0]);
 		if (buffer[0])
 		{
-			// printf("inside if\n");
 			if (ft_strchr(buffer, '\n') != 0)
 			{
 				return (ft_found_textline(buffer, output));
