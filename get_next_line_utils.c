@@ -6,13 +6,13 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:14:54 by nrenz             #+#    #+#             */
-/*   Updated: 2022/04/06 16:34:21 by nrenz            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:37:31 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(char *buffer, char c)
+char	*ft_strchr(char *buffer, char c)
 {
 	int	i;
 
@@ -20,10 +20,10 @@ int	ft_strchr(char *buffer, char c)
 	while (buffer[i])
 	{
 		if (buffer[i] == c)
-			return (i);
+			return (&buffer[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	ft_copy(char *dest, char *src, int len)
@@ -41,6 +41,7 @@ int	ft_copy(char *dest, char *src, int len)
 	}
 	else
 	{
+		len--;
 		while (i < len && src[i])
 		{
 			dest[i] = src[i];

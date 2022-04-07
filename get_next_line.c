@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:06:38 by nrenz             #+#    #+#             */
-/*   Updated: 2022/04/06 18:11:51 by nrenz            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:35:44 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE];
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*output;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	output = (char *)malloc(BUFFER_SIZE);
+	output = (char *)malloc(BUFFER_SIZE + 1);
 	if (!output)
 		return (NULL);
 	output[0] = '\0';
@@ -34,15 +34,13 @@ char	*ft_gnl_check(char *buffer, char *output, int fd)
 	{
 		if (buffer[0])
 		{
-			if (ft_strchr(buffer, '\n') != 0)
+			if (ft_strchr(buffer, '\n'))
 			{
 				return (ft_found_textline(buffer, output));
 			}
 			output = ft_realloc(output, buffer, 1, 0);
 		}
-		// printf("output: %s\n", output);
 		read_done = read(fd, buffer, BUFFER_SIZE);
-		// printf("read_done: %zd\n", read_done);
 		if (read_done == -1 || (read_done == 0 && output[0] == '\0'))
 		{
 			free(output);
@@ -53,7 +51,6 @@ char	*ft_gnl_check(char *buffer, char *output, int fd)
 		{
 			return (output);
 		}
-		// printf("\n###loop end###\n\n");
 	}
 }
 
@@ -62,16 +59,13 @@ char	*ft_found_textline(char *buffer, char *output)
 	int		cut_size;
 	char	*tmp;
 
-	// printf("called found_textline\n");
-	tmp = (char *)malloc(BUFFER_SIZE * sizeof(char));
-	cut_size = ft_strchr(buffer, '\n') + 1;
-	// printf("cut_size: %d\n", cut_size);
+	tmp = (char *)malloc(BUFFER_SIZE);
+	cut_size = (ft_strchr(buffer, '\n') - buffer) + 1;
 	if (!tmp)
 		return (NULL);
-	ft_copy(tmp, buffer, cut_size);
+	ft_copy(tmp, buffer, cut_size + 1);
 	output = ft_realloc(output, tmp, 1, 1);
 	ft_copy(buffer, &buffer[cut_size], 0);
-	// printf("output: %s\nbuffer: %s\n", output, buffer);
 	return (output);
 }
 
@@ -96,19 +90,21 @@ char	*ft_realloc(char *s1, char *s2, int free_s1, int free_s2)
 	return (new_output);
 }
 
-int	main(void)
-{
-	int				fd;
-	char			*string;
-	int i = 0;
+// int	main(void)
+// {
+// 	int				fd;
+// 	char			*str;
+// 	int i = 0;
 
-	fd = open("textfile.txt", O_RDWR);
-	while (i < 1)
-	{
-		string = get_next_line(fd);
-		printf("%s", string);
-		free(string);
-		i++;
-	}
-	return (0);
-}
+// 	fd = open("textfile.txt", O_RDWR);
+// 	while (1)
+// 	{
+// 		str = get_next_line(fd);
+// 		if (!str)
+// 			break ;
+// 		printf("%s", str);
+// 		free(str);
+// 		i++;
+// 	}
+// 	return (0);
+// }

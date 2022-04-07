@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:42:57 by nrenz             #+#    #+#             */
-/*   Updated: 2022/04/06 17:56:07 by nrenz            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:40:12 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_next_line(int fd);
 char	*ft_gnl_check(char *buffer, char *output, int fd);
 char	*ft_found_textline(char *buffer, char *output);
 char	*ft_realloc(char *s1, char *s2, int free_s1, int free_s2);
-int		ft_strchr(char *buffer, char c);
+char	*ft_strchr(char *buffer, char c);
 int		ft_copy(char *dest, char *src, int len);
 int		ft_strlen(char *str);
 
