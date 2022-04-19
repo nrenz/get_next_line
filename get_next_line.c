@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:06:38 by nrenz             #+#    #+#             */
-/*   Updated: 2022/04/07 17:35:44 by nrenz            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:02:51 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_gnl_check(char *buffer, char *output, int fd)
 		{
 			if (ft_strchr(buffer, '\n'))
 			{
-				return (ft_found_textline(buffer, output));
+				return (ft_found_new_line(buffer, output));
 			}
 			output = ft_realloc(output, buffer, 1, 0);
 		}
@@ -54,7 +54,7 @@ char	*ft_gnl_check(char *buffer, char *output, int fd)
 	}
 }
 
-char	*ft_found_textline(char *buffer, char *output)
+char	*ft_found_new_line(char *buffer, char *output)
 {
 	int		cut_size;
 	char	*tmp;
@@ -89,22 +89,3 @@ char	*ft_realloc(char *s1, char *s2, int free_s1, int free_s2)
 		free(s2);
 	return (new_output);
 }
-
-// int	main(void)
-// {
-// 	int				fd;
-// 	char			*str;
-// 	int i = 0;
-
-// 	fd = open("textfile.txt", O_RDWR);
-// 	while (1)
-// 	{
-// 		str = get_next_line(fd);
-// 		if (!str)
-// 			break ;
-// 		printf("%s", str);
-// 		free(str);
-// 		i++;
-// 	}
-// 	return (0);
-// }
